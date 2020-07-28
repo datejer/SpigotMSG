@@ -1,0 +1,13 @@
+name: MSG
+version: 1.0.0
+author: ejer
+main: ga.ejer.MSG.Main
+website: ejer.gq/SpigotMSG
+commands:
+  msg:
+    description: Message a player privately.
+    usage: /<command> <player> <message>
+    aliases: [message, t, tell, pm]
+  r:
+    description: Reply to a recent conversation.
+    usage: /<command> <message>
