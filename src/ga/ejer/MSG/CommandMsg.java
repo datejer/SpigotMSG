@@ -48,13 +48,13 @@ public class CommandMsg implements CommandExecutor {
             }
         }
 
-        if (s.equalsIgnoreCase("r")) {
+        if ((s.equalsIgnoreCase("reply")) || (s.equalsIgnoreCase("r"))) {
             String message = "";
             if (commandSender instanceof Player) {
                 Player player = (Player) commandSender;
 
                 if (strings.length <= 0) {
-                    player.sendMessage(ChatColor.GOLD + "» " + ChatColor.GRAY + "Usage: " + ChatColor.GOLD + "/r [message]");
+                    player.sendMessage(ChatColor.GOLD + "» " + ChatColor.GRAY + "Usage: " + ChatColor.GOLD + "/" + s.toString() + " [message]");
                     return true;
                 } else if (strings.length >= 1) {
                     UUID targetUUID = msg.get(player.getUniqueId());
