@@ -11,3 +11,4 @@ commands:
   r:
     description: Reply to a recent conversation.
     usage: /<command> <message>
+    aliases: [reply]
