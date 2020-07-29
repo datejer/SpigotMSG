@@ -6,6 +6,8 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         this.getCommand("msg").setExecutor(new CommandMsg());
+        this.getCommand("r").setExecutor(new CommandMsg());
+        this.getCommand("spy").setExecutor(new CommandMsg());
     }
 
     private CommandMsg cmsg;

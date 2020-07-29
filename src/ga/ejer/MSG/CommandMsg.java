@@ -29,14 +29,14 @@ public class CommandMsg implements CommandExecutor {
                     player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "» " + ChatColor.GRAY + "Please provide a message.");
                     return true;
                 } else if (strings.length >= 2) {
-                    Player target = Bukkit.getPlayerExact(strings[0]);
-                    if (target == null) {
-                        player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "» " + ChatColor.RED + "The player " + ChatColor.GOLD + target.getName() + ChatColor.RED + " cannot be found");
+                    if (Bukkit.getPlayerExact(strings[0]) == null) {
+                        player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "» " + ChatColor.RED + "The player " + ChatColor.GOLD + strings[0] + ChatColor.RED + " cannot be found");
                         return true;
                     }
                     for (int i = 1; i < strings.length; i++) {
                         message = message + strings[i] + " ";
                     }
+                    Player target = Bukkit.getPlayerExact(strings[0]);
 
                     player.sendMessage(ChatColor.GRAY + "(To " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + ") " + ChatColor.GRAY + message);
                     target.sendMessage(ChatColor.GRAY + "(From " + ChatColor.GOLD + player.getName() + ChatColor.GRAY + ") " + ChatColor.GRAY + message);
@@ -75,6 +75,11 @@ public class CommandMsg implements CommandExecutor {
                             }
                             player.sendMessage(ChatColor.GRAY + "(To " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + ") " + ChatColor.GRAY + message);
                             Bukkit.getPlayer(targetUUID).sendMessage(ChatColor.GRAY + "(From " + ChatColor.GOLD + player.getName() + ChatColor.GRAY + ") " + ChatColor.GRAY + message);
+                            for (UUID staff : spy) {
+                                Bukkit.getPlayer(staff).sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "(" + ChatColor.GOLD + player.getName() + ChatColor.GRAY + " -> " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + ") " + message);
+                            }
+                            msg.put(player.getUniqueId(), Bukkit.getPlayer(targetUUID).getUniqueId());
+                            msg.put(Bukkit.getPlayer(targetUUID).getUniqueId(), player.getUniqueId());
                             return true;
                         }
                     } else {
@@ -95,23 +100,19 @@ public class CommandMsg implements CommandExecutor {
                 if (player.hasPermission("MSG.spy")) {
                     if (spy.contains(player.getUniqueId())) {
                         spy.remove(player.getUniqueId());
-                        commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "SocialSpy: " + ChatColor.GREEN + "ON");
-                        return true;
+                        commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "SocialSpy: " + ChatColor.GREEN + "OFF");
                     } else {
                         spy.add(player.getUniqueId());
-                        commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "SocialSpy: " + ChatColor.RED + "OFF");
-                        return true;
+                        commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "SocialSpy: " + ChatColor.RED + "ON");
                     }
                 } else {
                     commandSender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "» " + ChatColor.RED + "You don't have permission to use this command");
-                    return true;
                 }
             } else {
                 commandSender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "» " + ChatColor.GRAY + "Only players can use this command");
-                return true;
             }
+            return true;
         }
-
         return true;
     }
 
