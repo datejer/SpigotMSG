@@ -100,10 +100,10 @@ public class CommandMsg implements CommandExecutor {
                 if (player.hasPermission("MSG.spy")) {
                     if (spy.contains(player.getUniqueId())) {
                         spy.remove(player.getUniqueId());
-                        commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "SocialSpy: " + ChatColor.GREEN + "OFF");
+                        commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "SocialSpy: " + ChatColor.RED + "OFF");
                     } else {
                         spy.add(player.getUniqueId());
-                        commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "SocialSpy: " + ChatColor.RED + "ON");
+                        commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Staff » " + ChatColor.GRAY + "SocialSpy: " + ChatColor.GREEN + "ON");
                     }
                 } else {
                     commandSender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "» " + ChatColor.RED + "You don't have permission to use this command");
