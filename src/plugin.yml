@@ -12,3 +12,12 @@ commands:
     description: Reply to a recent conversation.
     usage: /<command> <message>
     aliases: [reply]
+  spy:
+    description: Toggle socialspy for staff.
+    usage: /<command>
+    aliases: [socialspy, msgspy]
+    permission: MSG.spy
+permissions:
+  MSG.spy:
+    description: Allows to toggle socialspy mode.
+    default: op
